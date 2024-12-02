@@ -1,6 +1,13 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteUser, updateUser, addUser } from '../../RTK/slices/UserSlice';
 
 const List = () => {
+  const users = useSelector((state) => state.users.users);
+  console.log(users);
+  const dispatch = useDispatch()
+
+
   const products = [
     {
       name: 'Apple MacBook Pro 17"',
@@ -27,22 +34,57 @@ const List = () => {
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 bg-gray-100 uppercase">
           <tr>
-            <th scope="col" className="px-6 py-3">Product name</th>
-            <th scope="col" className="px-6 py-3">Color</th>
-            <th scope="col" className="px-6 py-3">Category</th>
-            <th scope="col" className="px-6 py-3">Price</th>
-            <th scope="col" className="px-6 py-3"><span className="sr-only">Edit</span></th>
+            <th scope="col" className="px-6 py-3">
+              Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Role
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Status
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Permissions
+            </th>
+            <th scope="col" className="px-2 py-3"></th>
+            <th scope="col" className="px-2 py-3 text-right">
+              Actions
+            </th>
+            <th scope="col" className="px-2 py-3"></th>
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => (
-            <tr key={index} className="bg-white border-b dark:border-gray-400 hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap text-black">{product.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-black">{product.color}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-black">{product.category}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-black">{product.price}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-black text-right">
-                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+          {users.map((user, index) => (
+            <tr
+              key={index}
+              className="bg-white border-b dark:border-gray-400 hover:bg-gray-50"
+            >
+              <td className="px-6 py-4 whitespace-nowrap text-black">
+                {user.name}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-black">
+                {user.role}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-black">
+                {user.status}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-black">
+                {user.price}
+              </td>
+              <td className="px-2 py-4 whitespace-nowrap text-black text-right">
+                <button className="font-medium text-blue-600 hover:underline">
+                  Edit
+                </button>
+              </td>
+              <td className="px-2 py-4 whitespace-nowrap text-black text-right">
+                <button className="font-medium text-blue-600 hover:underline">
+                  Add
+                </button>
+              </td>
+              <td className="px-2 py-4 whitespace-nowrap text-black text-right">
+                <button className="font-medium text-blue-600 hover:underline">
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
