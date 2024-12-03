@@ -7,7 +7,8 @@ import DeleteUserModal from "../DeleteUserModal";
 
 const List = () => {
   const users = useSelector((state) => state.users.users);
-  console.log(users);
+  const role = useSelector((state) => state.roles.roles);
+
   const [showAddUserForm, setShowAddUserForm] = useState(false);
   const [showEditUserForm, setShowEditUserForm] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -101,13 +102,13 @@ const List = () => {
               <th scope="col" className="px-6 py-3 border-b border-black">
                 Status
               </th>
-              <th scope="col" className="px-2 py-3 border-b border-black">Actions</th>
+              <th scope="col" className="px-2 py-3 border-b border-black">
+                Actions
+              </th>
               <th
                 scope="col"
                 className="px-2 py-3 border-b text-right border-black"
-              >
-                
-              </th>
+              ></th>
             </tr>
           </thead>
           <tbody>
@@ -117,7 +118,10 @@ const List = () => {
                   {user.name}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-gray-600">
-                  {user.role}
+                  {(() => {
+                    const a = role.filter((roles, index) => user.role === roles.id);
+                    return a[0]?.name;
+                  })()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-gray-600">
                   {user.status}

@@ -5,15 +5,13 @@ const initialState = {
     {
       id: Date.now(),
       name: "harry",
-      role: "admin",
-      permission: ["read", "edit", "add"],
+      role: 1,
       status: "active",
     },
     {
       id: Date.now() + 1,
       name: "john",
-      role: "manager",
-      permission: ["read", "edit"],
+      role: 2,
       status: "active",
     },
   ],

@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { addUser } from "../../RTK/slices/UserSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateUserForm = ({ closeForm }) => {
+  const role = useSelector((state) => state.roles.roles);
+console.log(role)
   const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     name: "",
-    role: "Admin",
+    role: role[0].name,
     status: "Active",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value)
     setFormData({ ...formData, [name]: value });
   };
 
@@ -19,7 +23,7 @@ const CreateUserForm = ({ closeForm }) => {
     e.preventDefault();
     const newUser = {
       name: formData.name,
-      role: formData.role,
+      role,
       status: formData.status,
     };
 
@@ -27,7 +31,7 @@ const CreateUserForm = ({ closeForm }) => {
 
     setFormData({
       name: "",
-      role: "Admin",
+      role: role[0]?.name,
       status: "Active",
     });
     closeForm();
@@ -72,9 +76,9 @@ const CreateUserForm = ({ closeForm }) => {
             className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             required
           >
-            <option value="Admin">Admin</option>
-            <option value="Manager">Manager</option>
-            <option value="Employee">Employee</option>
+            {role.map((roles, index) => {
+             return <option value={roles.name}>{roles.name}</option>
+            })}
           </select>
         </div>
 

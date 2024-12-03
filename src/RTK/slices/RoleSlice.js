@@ -1,4 +1,3 @@
-// src/slices/roleSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -8,8 +7,16 @@ const initialState = {
       name: "Admin",
       permissions: [{ Read: true }, { Write: true }, { Delete: true }],
     },
-    { id: 2, name: "Editor", permissions: [{ Read: true }, { Write: true }, { Delete: false }]},
-    { id: 3, name: "Viewer", permissions: [{ Read: true }, { Write: false }, { Delete: false }]},
+    {
+      id: 2,
+      name: "Editor",
+      permissions: [{ Read: true }, { Write: true }, { Delete: false }],
+    },
+    {
+      id: 3,
+      name: "Viewer",
+      permissions: [{ Read: true }, { Write: false }, { Delete: false }],
+    },
   ],
 };
 
@@ -17,22 +24,22 @@ const roleSlice = createSlice({
   name: "roles",
   initialState,
   reducers: {
-    addRole: (state, action) => {
-      state.roles.push(action.payload);
-    },
     updateRole: (state, action) => {
-      const index = state.roles.findIndex(
-        (role) => role.id === action.payload.id
-      );
-      if (index !== -1) {
-        state.roles[index] = action.payload;
+      const { id, permissionKey } = action.payload;
+      const role = state.roles.find((role) => role.id === id);
+
+      if (role) {
+        // Find the permission object and toggle its value
+        role.permissions = role.permissions.map((permission) => {
+          if (Object.keys(permission)[0] === permissionKey) {
+            return { [permissionKey]: !permission[permissionKey] };
+          }
+          return permission;
+        });
       }
-    },
-    deleteRole: (state, action) => {
-      state.roles = state.roles.filter((role) => role.id !== action.payload);
     },
   },
 });
 
-export const { addRole, updateRole, deleteRole } = roleSlice.actions;
+export const { updateRole } = roleSlice.actions;
 export default roleSlice.reducer;
