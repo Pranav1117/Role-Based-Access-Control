@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { addUser } from "../../RTK/slices/UserSlice";
+import { updateUser } from "../../RTK/slices/UserSlice";
 import { useDispatch } from "react-redux";
 
-const CreateUserForm = ({ closeForm }) => {
+const EditUserForm = ({ closeForm, name, role, status, id }) => {
+  console.log(id);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: "",
-    role: "Admin",
-    status: "Active",
+    id,
+    name,
+    role,
+    status,
   });
 
   const handleChange = (e) => {
@@ -18,12 +20,13 @@ const CreateUserForm = ({ closeForm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = {
+      id: formData.id,  
       name: formData.name,
       role: formData.role,
       status: formData.status,
     };
 
-    dispatch(addUser(newUser));
+    dispatch(updateUser(newUser));
 
     setFormData({
       name: "",
@@ -102,13 +105,12 @@ const CreateUserForm = ({ closeForm }) => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-gray-700 text-white py-2 rounded-lg hover:bg-gray-800 transition"
+          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
         >
-          Create User
-        </button>
+          Update        </button>
       </form>
     </div>
   );
 };
 
-export default CreateUserForm;
+export default EditUserForm;

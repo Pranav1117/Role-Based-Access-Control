@@ -5,52 +5,55 @@ import CreateUserForm from "../../Components/Users/CreateuserForm";
 
 const AdminDashboard = () => {
   const [showAddUserForm, setShowAddUserForm] = useState(false);
+  const [activeSection, setActiveSection] = useState("users"); // State to manage active section
 
-  const closeForm = () => {
-    setShowAddUserForm(false);
-  };
+  
 
   return (
-    <div>
-      <div className="w-[90%] mx-auto flex items-center justify-between">
-        <h2 className="font-smibold text-3xl p-4">Admin Dashboard</h2>
-        <div className="px-1 rounded-full flex  bg-buttonBackground">
+    <div className="flex h-screen ">
+      {/* Sidebar */}
+      <div className="bg-gray-800 text-white flex flex-col fixed top-0 left-0 h-[100vh] w-[20vw] mt-16">
+        <h2 className="text-2xl font-bold p-4 border-b border-gray-700">
+          Admin Dashboard
+        </h2>
+        <nav className="flex flex-col flex-grow">
           <button
-            className={`${
-              showAddUserForm ? "bg-activeButtonBg" : ""
-            } px-4 py-2 rounded-full`}
-            onClick={() => setShowAddUserForm(true)}
+            className={`p-4 text-left ${
+              activeSection === "users" ? "bg-gray-700" : ""
+            } hover:bg-gray-700`}
+            onClick={() => setActiveSection("users")}
           >
-            Add Users
+            Users
           </button>
-          {/* <button
-            className={`${
-              showUserList ? "" : "bg-activeButtonBg"
-            } px-4 py-2 rounded-full`}
-            onClick={() => setShowUserList(false)}
+          <button
+            className={`p-4 text-left ${
+              activeSection === "roles" ? "bg-gray-700" : ""
+            } hover:bg-gray-700`}
+            onClick={() => setActiveSection("roles")}
           >
-            Role & Permissions
-          </button> */}
-        </div>
+            Roles
+          </button>
+          <button
+            className={`p-4 text-left ${
+              activeSection === "permissions" ? "bg-gray-700" : ""
+            } hover:bg-gray-700`}
+            onClick={() => setActiveSection("permissions")}
+          >
+            Permissions
+          </button>
+        </nav>
       </div>
-      <List />
-      
-      <div
-        className={`${
-          showAddUserForm
-            ? "fixed inset-0 flex items-center justify-center"
-            : "hidden"
-        } bg-black bg-opacity-10 backdrop-blur-sm z-50`}
-      >
-        <div className="relative rounded-lg shadow-lg">
-          <button
-            className="absolute top-4 right-4 text-xl text-gray-500 hover:text-gray-800"
-            onClick={() => setShowAddUserForm(false)}
-          >
-            ✕
-          </button>
-          <CreateUserForm closeForm={closeForm}/>
+
+      {/* Main Content */}
+      <div className="flex-1 bg-gray-100">  
+        <div className="  ml-[20vw]">
+          {activeSection === "users" && <List />}
+          {activeSection === "roles" && <Roles />}
+          {activeSection === "permissions" && <div>Permissions Section</div>}
         </div>
+
+        {/* Add User Form Modal */}
+       
       </div>
     </div>
   );
