@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
   );

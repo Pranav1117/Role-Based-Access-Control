@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteUser, updateUser, addUser } from "../../RTK/slices/UserSlice";
+import { useSelector } from "react-redux";
 import CreateUserForm from "./CreateuserForm";
 import EditUserForm from "./EditUserForm";
 import DeleteUserModal from "../DeleteUserModal";
@@ -45,7 +44,7 @@ const List = () => {
             >
               ✕
             </button>
-            <CreateUserForm closeForm={closeEditForm} />
+            <CreateUserForm closeForm={closeAddForm} />
           </div>
         </div>
       )}

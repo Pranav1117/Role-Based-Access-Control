@@ -4,11 +4,7 @@ import Roles from "../../Components/Roles";
 import CreateUserForm from "../../Components/Users/CreateuserForm";
 
 const AdminDashboard = () => {
-  const [showAddUserForm, setShowAddUserForm] = useState(false);
-  const [activeSection, setActiveSection] = useState("users"); // State to manage active section
-
-  
-
+  const [activeSection, setActiveSection] = useState("users");
   return (
     <div className="flex h-screen ">
       {/* Sidebar */}
@@ -33,14 +29,6 @@ const AdminDashboard = () => {
           >
             Roles
           </button>
-          <button
-            className={`p-4 text-left ${
-              activeSection === "permissions" ? "bg-gray-700" : ""
-            } hover:bg-gray-700`}
-            onClick={() => setActiveSection("permissions")}
-          >
-            Permissions
-          </button>
         </nav>
       </div>
 
@@ -51,9 +39,6 @@ const AdminDashboard = () => {
           {activeSection === "roles" && <Roles />}
           {activeSection === "permissions" && <div>Permissions Section</div>}
         </div>
-
-        {/* Add User Form Modal */}
-       
       </div>
     </div>
   );
