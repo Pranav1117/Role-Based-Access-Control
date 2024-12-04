@@ -103,7 +103,6 @@ console.log(role)
           </select>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-gray-700 text-white py-2 rounded-lg hover:bg-gray-800 transition"

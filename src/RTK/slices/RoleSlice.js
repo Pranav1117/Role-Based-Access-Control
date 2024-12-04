@@ -29,7 +29,6 @@ const roleSlice = createSlice({
       const role = state.roles.find((role) => role.id === id);
 
       if (role) {
-        // Find the permission object and toggle its value
         role.permissions = role.permissions.map((permission) => {
           if (Object.keys(permission)[0] === permissionKey) {
             return { [permissionKey]: !permission[permissionKey] };

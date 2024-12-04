@@ -33,7 +33,6 @@ const List = () => {
 
   return (
     <div className="relative overflow-x-auto mx-auto rounded-lg backdrop-blur-lg bg-white/30 border border-white/20 mt-12 p-6 min-h-[90vh]">
-      {/* Create New user Pop up Modal */}
 
       {showAddUserForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 backdrop-blur-sm h-[100vh] z-50">
